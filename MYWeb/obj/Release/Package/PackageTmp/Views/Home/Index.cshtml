@@ -1,0 +1,61 @@
+﻿@using System.Data
+@{
+    ViewBag.Title = "首页";
+    if(false)
+    {
+        <script src="~/Scripts/_references.js"></script>
+    }
+}
+
+<div class="empty text-center" style="margin:50px;font-size:50px;">Magicdawn's Site</div>
+<div class="row">
+    <div class="span2" style="">
+        <img src="~/Image/Home/right-arrow.jpg" id="arrowimg" />
+        @*<div id="arrowimg-textdes" class="text-center">
+                俺写的,小玩意
+            </div>*@
+    </div>
+    <div class="span9" style="">
+        <button class="btn i-do-button" url="/Thunder/Index">
+            迅雷VIP获取器(在线版)
+        </button>
+        &nbsp;
+        <button class="btn i-do-button" url="/Thunder/Async">
+            迅雷VIP获取器(异步版)
+        </button>
+        <br /><br />
+        <button class="btn i-do-button" url="/Simsimi/Index">
+            小黄鸡 - Simsimi
+        </button>
+        <br /><br />
+        <button class="btn i-do-button" url="/Music/Index">
+            音乐暂存
+        </button>
+    </div>
+</div>
+
+<style>
+    #arrowimg-textdes
+    {
+        background-color: rgba(0,0,0,0.5);
+        color: white;
+        display: none;
+        position: relative;
+        bottom: 20px;
+        left: 0;
+    }
+</style>
+<script>
+    $(function () {
+        $(".i-do-button").click(function () {
+            window.open($(this).attr("url"), "_blank");
+        });
+
+        //var $text = $("#arrowimg-textdes");
+        //$("#arrowimg").mouseover(function () {
+        //    $text.show();
+        //}).mouseout(function () {
+        //    $text.hide();
+        //});
+    });
+</script>

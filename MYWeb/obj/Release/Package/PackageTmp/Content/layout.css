@@ -1,0 +1,18 @@
+﻿*
+{
+    font-family: 'Microsoft YaHei',Consolas,'Lucida Console', !important;
+    /*font-size: 18px;*/
+}
+
+body
+{
+    /*顶部导航条*/
+    padding-top: 40px;
+}
+
+/*Bootatrap Customize*/
+/*dropdown menu 里面 放文字的*/
+.dropdown-menu-text
+{
+    padding: 3px 20px;
+}

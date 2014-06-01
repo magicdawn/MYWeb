@@ -1,0 +1,69 @@
+﻿@{
+    Layout = null;
+    ViewBag.Title = "小黄鸡 - Simsimi";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <link href="/Content/Simsimi/index.css" rel="stylesheet" />
+    <script src="/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="/Content/Simsimi/simsimi.js"></script>
+</head>
+<body>
+    <h1 id="test"></h1>
+    <div class="content">
+
+        <div class="chatroom">
+            <!-- begin logo  -->
+            <div class="logo">
+                <img alt="小黄鸡网页版" src="/Content/Simsimi/logo.png">
+                <a href="http://xhj.douqq.com/" target="_blank" id="copyright">来源地址(xhj.douqq.com)</a>
+            </div>
+            <!-- end logo -->
+            <br>
+
+            <!-- 聊天框 -->
+            <div id="talkbox">
+                @* 结果 *@
+                <div id="result">
+                    <div class="bot">
+                        <span class="bot_img"></span>
+                        <span class="bot_msg">
+                            <font style="line-height: 40px;">Hi~~~,和我聊聊天吧，俺寂寞空虚冷！！！
+                            </font>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- 发送框 -->
+                <div class="sendbox">
+                    <input id="text" title="按回车键发送" name="text" type="text" />
+                    <input id="btnSend" title="按回车键发送" value="发送" type="submit">
+                    <div class="clear"></div>
+                </div>
+            </div>
+            <!-- 聊天框 结束 -->
+            <br>
+        </div>
+
+        <!-- 右边 -->
+        <div class="rightbox">
+            么么哒，来和我聊天啊~<br />
+            我就是传说中能萌死人的
+            <h2>小黄鸡-Simsimi</h2>
+            <br />
+            <br />
+            我曾准确答出了薛定谔的方程式，还懂得结构力学、能和你谈谈“概念结力和计算结力并行”，最最重要的是还能教你
+            <h2>泡学妹哦</h2>
+            <br />
+            <br />
+            <h2>小黄鸡陪你聊到High!</h2>
+            <br />
+            <img alt="小黄鸡" src="/Content/Simsimi/ji.jpg" width="270" height="270" />
+        </div>
+
+    </div>
+</body>
+</html>

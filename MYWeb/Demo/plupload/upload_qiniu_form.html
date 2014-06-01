@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>使用form上传到七牛</title>
+    <script src="../../Scripts/jquery-1.8.2.min.js"></script>
+    <script src="../../Content/Qiniu/plupload/js/plupload.full.min.js"></script>
+    <script src="../../Content/Qiniu/plupload/js/i18n/zh_CN.js"></script>
+
+    <script>
+        $(function () {
+            $.get("/Music/Uptoken", function (data) {
+                $(uptoken).val(data);
+            });
+            var form = document.forms[0];
+            var file = form["file"];
+            var key = form["key"];
+            file.onchange = function () {
+                key.value = file.value;
+            };
+        });
+    </script>
+</head>
+<body>
+    <form method="post" action="http://up.qiniu.com/" enctype="multipart/form-data">
+        <input name="key" type="hidden" value="">
+        <!--<input name="x:<custom_name>" type="hidden" value="<custom_value>">-->
+        <input name="token" type="hidden" value="" id="uptoken">
+        <input name="file" type="file" />
+        <input type="submit" value="上传">
+    </form>
+</body>
+</html>

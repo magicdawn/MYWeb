@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "音乐管理";
+}
+
+@* 七牛云存储 *@
+<script src="~/Content/Qiniu/plupload/js/plupload.full.min.js"></script>
+<script src="~/Content/Qiniu/qiniu.js"></script>
+@* 首页js *@
+<script src="~/Content/Music/index.js"></script>
+
+<div class="container" id="upload-container">
+    <div style="margin:50px;"></div>
+    <h1 style="display:inline;">上传mp3文件</h1>
+
+    <a href="https://portal.qiniu.com/bucket/resource?bucket=ranger#1" target="_blank">Qiniu</a>
+    <br /><br /><br />
+
+    <input type="button" value="选择文件" id="select_file" class="btn" />
+    <br />
+    <input style="margin-top:10px;" type="button" value="上传" id="start_upload" class="btn btn-success" />
+
+    <div id="filelist"></div>
+    <div id="result" style="margin-top:20px;background-color:black;color:green;">
+
+    </div>
+</div>

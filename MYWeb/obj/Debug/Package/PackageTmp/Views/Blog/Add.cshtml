@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "Add";
+    
+}
+
+<h2>Add</h2>
+
+@using (Html.BeginForm("Add", "Blog"))
+{
+    <input type="text" name="title" />
+    <input type="text" name="content" />
+    @Html.DropDownList("caId", ViewBag.SelectList as SelectList)
+    <input type="submit" value="增加" />
+}

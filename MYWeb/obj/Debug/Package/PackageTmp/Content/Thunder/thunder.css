@@ -1,0 +1,76 @@
+﻿/*整个表格*/
+#tbldata
+{
+    width: 600px;
+    padding: 0;
+    margin: 0 auto;
+}
+/*单元格*/
+td
+{
+    /*font-size: 18px;*/
+    font-family: 'Microsoft YaHei' !important;
+    text-decoration: none;
+}
+/*标题*/
+#tblhead
+{
+    text-align: center;
+}
+/*小提示*/
+#tips
+{
+    text-align: center;
+    font-size: 18px;
+    position: relative;
+    top: -8px;
+}
+/*复制成功的消息*/
+#info
+{
+    display: none;
+    text-align: center;
+    /*顶部居中*/
+    position: fixed;
+    top: 45px;
+    width: 600px;
+}
+/*复制到剪贴板,链接*/
+.clip
+{
+    display: none;
+    /*margin-right: 5px;
+    margin-top: 5px;*/
+    float: right;
+    font-size: 14px;
+    text-decoration: underline;
+    text-decoration-color: blue;
+    color: snow;
+    cursor: pointer;
+}
+
+#table-header, #table-header th
+{
+    background-color: #390;
+    color: white;
+    /*background-color:*/
+}
+
+/*单元格hover*/
+#tbldata td:hover
+{
+    background-color: #ff6a00 !important;
+    color: white;
+}
+
+/*点击变cyan*/
+.clickcyan
+{
+    background-color: cyan;
+}
+
+/*行号*/
+.line-index
+{
+    text-align: center !important;
+}

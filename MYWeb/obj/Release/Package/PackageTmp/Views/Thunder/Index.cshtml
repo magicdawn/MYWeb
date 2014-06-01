@@ -1,0 +1,38 @@
+﻿@using System.Text.RegularExpressions
+
+@{
+    ViewBag.Title = "迅雷VIP";
+    int i = 1;
+    if(false)
+    {
+        <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    }
+}
+<link href="/Content/Thunder/thunder.css" rel="stylesheet" />
+<script src="/Content/Thunder/index.js"></script>
+
+<h2 id="tblhead">@(ViewBag.Title)账号(<a href="http://xunlei6.com/2.htm" target="_blank">原地址</a>)(<a href="/Thunder/Update">强制更新</a>)</h2>
+<div id="tips">双击也可复制</div>
+<div class="alert" id="info">复制成功</div>
+<div id="tbldata">
+    <table class="table table-bordered">
+        <colgroup>
+            <col width="10%" />
+            <col width="45%" />
+            <col width="45%" />
+        </colgroup>
+        <tr id="table-header">
+            <th>#</th>
+            <th>账号</th>
+            <th>密码</th>
+        </tr>
+        @foreach(var pair in ViewBag.Dict as Dictionary<string,string>)
+        {
+            <tr>
+                <td>@(i++)</td>
+                <td><span>@pair.Key</span><span class="clip">复制到剪贴板</span></td>
+                <td><span>@pair.Value</span><span class="clip">复制到剪贴板</span></td>
+            </tr>
+        }
+    </table>
+</div>

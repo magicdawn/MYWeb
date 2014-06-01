@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - Magicdawn</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+
+    @* css *@
+    @Styles.Render("~/layout-css","~/bootstrap-v2-css")
+
+    @* jq bootstrap js *@
+    @Scripts.Render("~/jquery","~/bootstrap-v2-js")
+</head>
+<body>
+    @* 导航条 *@
+    <div class="navbar navbar-fixed-top navbar-inverse">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="brand" href="/">Magicdawn</a>
+                <ul class="nav">
+                    <li>
+                        <a target="_blank" href="/Home/About">关于偶</a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="/Home/Contact">联系方式</a>
+                    </li>
+                </ul>
+
+                @* 右侧导航条 *@
+                <ul class="pull-right nav">
+
+                    @* 常用 *@
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            常用链接
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="http://magicdawn.apphb.com/" target="_blank">在线版</a></li>
+                            <li>
+                                <a href="https://appharbor.com/applications/magicdawn" target="_blank">
+                                    AppHarbor-管理界面
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    @* BootStrap *@
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            BootStrap导航
+                            @* 小三角 *@
+                            <b class="caret"></b>
+                        </a>
+
+                        @* 下拉菜单 *@
+                        <ul class="dropdown-menu">
+
+                            <li class="text-center" style="color:purple;">V2</li>
+                            <li><a href="http://v2.bootcss.com/getting-started.html" target="_blank">V2 文档</a></li>
+                            <li><a target="_blank" href="http://v2.bootcss.com/base-css.html">基本CSS样式</a></li>
+                            <li><a target="_blank" href="http://v2.bootcss.com/components.html">组件</a></li>
+                            <li><a target="_blank" href="http://v2.bootcss.com/javascript.html">JS</a></li>
+
+                            @* 分隔符 *@
+                            <li class="divider"></li>
+
+                            <li class="text-center" style="color:purple;>V3</li>
+                            <li><a href="http://v3.bootcss.com/getting-started/" target="_blank">V3</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="body" class="container">
+        @RenderBody()
+    </div>
+    <footer>
+        <div class="clear"></div>
+        <p class="text-center">&copy;Copyright @DateTime.Now.Year - Magicdawn </p>
+    </footer>
+    @RenderSection("scripts",required: false)
+</body>
+</html>
