@@ -2,23 +2,25 @@
  Created BY Magicdawn;
  */
 
-//usage : var replaced = "xxx".replaceAll("old","new");
-String.prototype.replaceAll = function (oldValue, replaceValue) {
+//usage : var replaced = "xxx".razorReplaceAll("old","new");
+String.prototype.razorReplaceAll = function (oldValue, replaceValue) {
     return this.replace(new RegExp(oldValue, 'g'), replaceValue);
 };
-//usage : "xxx".format(obj0, obj1, obj2); no parameter count limit
-String.prototype.format = function (obj0, obj1, obj2) {
+//usage : "xxx".razorFormat(obj0, obj1, obj2); no parameter count limit
+String.prototype.razorFormat = function (obj0, obj1, obj2) {
     var result = this;
     for (var i in arguments)
     {
         //将{0} -> obj[0]
         //new RegExp("\\{ 0 \\\}",g)
-        result = result.replaceAll("\\{" + i + "\\}", arguments[i].toString());
+        result = result.razorReplaceAll("\\{" + i + "\\}", arguments[i].toString());
     }
     return result;
 };
 
 (function (global) {
+    var version = '0.6.1';
+    var update_date = '2014-5-24';
     "use strict";
 
     //-----------------------------------------
@@ -87,7 +89,7 @@ String.prototype.format = function (obj0, obj1, obj2) {
 
         //Segment[] result = SegmentProcesser.process(String template);
         process: function (template) {
-            var model = new StringBlockModel(simpleMinfy(template));
+            var model = new StringBlockModel(template);
             this.processStringBlock(model);
             return model.segments;
         },
@@ -275,7 +277,9 @@ String.prototype.format = function (obj0, obj1, obj2) {
             var inIndex = loop.indexOf('in');
             var item = loop.substring(0, inIndex).trim()
             var items = loop.substring(inIndex + 2).trim();
-            var loopCode = "for(var $index in {1}) { var {0} = {1}[$index];".format(item, items);
+
+            //循环体
+            var loopCode = "for(var $index = 0,length = {1}.length;$index < length;$index++) { var {0} = {1}[$index];".razorFormat(item, items);
             model.segments.push(new Segment(loopCode, ESegmentType.CodeBlock));
 
             //2.循环体
@@ -347,10 +351,20 @@ String.prototype.format = function (obj0, obj1, obj2) {
         },
         processComment: function (model, index) {
             // @* comment *@
-            var commentEnd = this.getSecondIndex(model.template, index);
-            model.processedIndex = commentEnd;
-
-            return commentEnd;
+            var remain = model.template.substring(index);
+            var xingIndex = remain.indexOf('*' + this.symbol);
+            if (xingIndex > -1)
+            {
+                //存在*@
+                var commentEnd = xingIndex + index + 1;
+                model.processedIndex = commentEnd;
+                return commentEnd;
+            }
+            else
+            {
+                //只有@* 没有*@
+                return index;
+            }
         },
 
         getSecondIndex: function (template, firstIndex) {
@@ -359,7 +373,6 @@ String.prototype.format = function (obj0, obj1, obj2) {
                 '{': '}',
                 '(': ')'
             };
-            pair[this.symbol] = this.symbol; //pair['@']='@';
 
             var first = template.substr(firstIndex, 1); //'{' or '('
             var second = pair[first];
@@ -370,7 +383,6 @@ String.prototype.format = function (obj0, obj1, obj2) {
                 var cur = template.substr(index, 1);
                 if (cur == second)
                 {
-                    //@  --> @ break;
                     count--;
                     if (count == 0)
                     {
@@ -391,9 +403,9 @@ String.prototype.format = function (obj0, obj1, obj2) {
         //'&gt;'    ---->    >
         //'&amp;'   ---->    &
         getOriginalFromEscapedCode: function (variable) {
-            return variable.replaceAll('&lt;', '<')
-                .replaceAll('&gt;', '>')
-                .replaceAll('&amp;', '&');
+            return variable.razorReplaceAll('&lt;', '<')
+                .razorReplaceAll('&gt;', '>')
+                .razorReplaceAll('&amp;', '&');
         }
     };
 
@@ -434,7 +446,7 @@ String.prototype.format = function (obj0, obj1, obj2) {
                             //不允许空值,就是值不存在的情况下会报错
                             //@(data)
                             //result.push(data);
-                            var inner = "$result+={0};".format(data);
+                            var inner = "$result+={0};".razorFormat(data);
                             functionContent.push(inner);
                         }
                         else
@@ -443,7 +455,7 @@ String.prototype.format = function (obj0, obj1, obj2) {
                             //@(data)
                             //if(typeof(data) != 'undefined' && data) result.push(data);
                             //else result.push("data");
-                            var inner = "if(typeof({0}) != 'undefined' && {0}) $result+={0}; else $result+='{0}';".format(data);
+                            var inner = "if(typeof({0}) != 'undefined' && {0}) $result+={0}; else $result+='{0}';".razorFormat(data);
                             functionContent.push(inner);
                         }
                         break;
@@ -452,7 +464,7 @@ String.prototype.format = function (obj0, obj1, obj2) {
                         //result+='div';
                         // "div"
                         //result+='\"div\"';
-                        var inner = "$result+='{0}';".format(
+                        var inner = "$result+='{0}';".razorFormat(
                             this.escapeInFunction(data)
                             //将String直接量中的 ' " 屏蔽
                         );
@@ -465,11 +477,11 @@ String.prototype.format = function (obj0, obj1, obj2) {
             functionContent.push("return $result;");//return $result;
             try
             {
-                return new Function(this.modelName, functionContent.join(''));
+                return new Function(this.modelName, functionContent.join('\n'));
             }
             catch (e)
             {
-                console.log("new Function出错,请检查 模板语法 ...")
+                console.log("new Function出错,请检查 模板语法 ...");
                 return new Function("return '';");
             }
         }
@@ -489,23 +501,53 @@ String.prototype.format = function (obj0, obj1, obj2) {
         },
 
         //自定义相关
-        changeSymbol: function (newSymbol) {
+        symbol: function (newSymbol) {
+            // get
+            if (!newSymbol) return SegementProcesser.symbol;
+
+            // set
             SegementProcesser.symbol = newSymbol;
+            return this;
         },
-        changeModelName: function (newModelName) {
+        model: function (newModelName) {
+            // get
+            if (!newModelName) return SegmentCompiler.modelName;
+
+            //2 set
             SegmentCompiler.modelName = newModelName;
+            return this;
         },
         enableEmptyValue: function (boolEnable) {
             SegmentCompiler.enableEmptyValue = boolEnable;
+            return this;
         },
         init: function () {
-            this.changeSymbol('@');
-            this.changeModelName('ViewBag');
-            this.enableEmptyValue(false);
+            return this.symbol('@').model('ViewBag').enableEmptyValue(false);
         },
 
-        version: "0.4.1",
-        updateDate: "2014-5-4"
+        version: version,
+        update_date: update_date,
+
+        //工具
+        encodeHtml: function (str) {
+            //在@(- data)不用这个因为速度太慢
+            //content += ".replace(/&/g,'&amp;')";
+            //content += ".replace(/</g,'&lt;')";
+            //content += ".replace(/>/g,'&gt;')";
+            //content += ".replace(/'/g,'&#39;')";
+            //content += '.replace(/"/g,"&#34;")';
+            //content += ".replace(/\\//g,'&#47;')";
+            return str
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/'/g, '&#39;')
+            .replace(/"/g, "&#34;")
+            .replace(/\//g, '&#47;');
+        },
+        decodeHtml: function (str) {
+            return SegementProcesser.getOriginalFromEscapedCode(str);
+        }
     };
 
     //导出
@@ -535,24 +577,24 @@ String.prototype.format = function (obj0, obj1, obj2) {
             var attr = jqObj.attr("razor-for") || jqObj.attr("data-razor-for");
             if (attr)
             {
-                return 'for({0}){'.format(attr.trim());
+                return 'for({0}){'.razorFormat(attr.trim());
             }
             attr = jqObj.attr("razor-if") || jqObj.attr("data-razor-if");
             if (attr)
             {
-                return 'if({0}){'.format(attr.trim());
+                return 'if({0}){'.razorFormat(attr.trim());
             }
 
             attr = jqObj.attr("razor-while") || jqObj.attr("data-razor-while");
             if (attr)
             {
-                return 'while({0}){'.format(attr.trim());
+                return 'while({0}){'.razorFormat(attr.trim());
             }
 
             attr = jqObj.attr("razor-each") || jqObj.attr("data-razor-each");
             if (attr)
             {
-                return "each({0}){".format(attr);
+                return "each({0}){".razorFormat(attr);
             }
 
             //啥都不是
@@ -561,39 +603,37 @@ String.prototype.format = function (obj0, obj1, obj2) {
 
         $.fn.extend({
             //------------------------------------------
-            //-----render 表示处理节点的innerHtml
+            //  render 表示处理节点的innerHtml
             //------------------------------------------
             //var func = $(selector).compile();
             compile: function () {
-                var template = '';
+                //div 的 innerHTML 已经不是模板
+                var template = this[0].tagName === "SCRIPT"
+                    ? this.html() //script标签直接取html()
+                    : this.attr("razor-template") || this.html();//div标签,先取razor-template属性
 
-                if (this[0].tagName === "SCRIPT")
+                //razor-for/while/if
+                //razor-each
+                // script | div 均可有这些属性
+                var loopHeader = getLoopHeader(this);
+                if (loopHeader)
                 {
-                    template = this.html();
-                }
-                else
-                {
-                    //div 的 innerHTML 已经不是模板
-                    template = this.attr("razor-template") || this.html();
-                    //razor-template
-                    //  razor-for
-                    //  razor-each
-                    var loopHeader = getLoopHeader(this);
-                    if (loopHeader)
-                    {
-                        //@ + for(){ + xxx + }
-                        template = SegementProcesser.symbol + loopHeader + template + '}';
-                    }
+                    //@ + for(){ + xxx + }
+                    template = SegementProcesser.symbol + loopHeader + template + '}';
                 }
                 return razor.compile(template);
             },
 
-            //String html=$("#id").render(ViewBag)
+            //-----------------------------------------
+            //  String html=$("#id").render(ViewBag)
+            //  如果是script -> string
+            //  如果是div ->html(render结果) & show
+            //-----------------------------------------
             render: function (ViewBag) {
                 var func = this.compile();
                 var result = func(ViewBag);
 
-                if (this[0].tagName != "SCRIPT")
+                if (this[0].tagName !== "SCRIPT")
                 {
                     //1.save razor-template
                     if (!this.attr("razor-template"))

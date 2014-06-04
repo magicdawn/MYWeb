@@ -36,7 +36,7 @@
             `each(pair in ViewBag.pairs)
             {
             <tr>
-                <td class="line-index">`($index)</td>
+                <td class="line-index">`($index +1)</td>
                 <td><span>`(pair.id)</span><span class="clip">复制到剪贴板</span></td>
                 <td><span>`(pair.pwd)</span><span class="clip">复制到剪贴板</span></td>
             </tr>
@@ -46,7 +46,7 @@
 </div>
 
 <script>
-    razor.changeSymbol('`');
+    razor.symbol('`');
     $(function () {
         $.getJSON('@Url.Action("Json")', function (data) {
             $("#tmpl").renderToParent({
