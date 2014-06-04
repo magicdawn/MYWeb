@@ -1,0 +1,5 @@
+#包含账号什么的东西
+MYWeb/Web.Release.config
+
+#发布的
+MYWeb_Deploy/
