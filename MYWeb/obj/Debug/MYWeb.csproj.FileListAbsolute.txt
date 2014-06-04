@@ -108,5 +108,4 @@ D:\C#\project\MYWeb\MYWeb\obj\Debug\MYWeb.dll
 D:\C#\project\MYWeb\MYWeb\obj\Debug\MYWeb.pdb
 D:\C#\project\MYWeb\MYWeb\bin\CKFinder.dll
 D:\C#\project\MYWeb\MYWeb\bin\CKFinder.pdb
-D:\C#\project\MYWeb\MYWeb\obj\Debug\MYWeb.csprojResolveAssemblyReference.cache
 D:\C#\project\MYWeb\MYWeb\bin\Qiniu.dll
