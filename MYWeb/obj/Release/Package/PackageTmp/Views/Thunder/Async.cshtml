@@ -1,129 +1,53 @@
 ﻿@using System.Text.RegularExpressions
+
 @{
     ViewBag.Title = "迅雷VIP";
-}
-@if (false)
-{
-    <script src="../../Scripts/jquery-1.7.1.min.js"></script>
+    if(false)
+    {
+        <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    }
 }
 <link href="/Content/Thunder/thunder.css" rel="stylesheet" />
-<script>
-    var $info;
-    var timeHide, className;
+<script src="~/Content/razor-tmpl/razor-tmpl.js"></script>
+<script src="/Content/Thunder/index.js"></script>
 
-    function showInfo(text, type) {
-        var $info = $("#info");
-        if (!type)
-        {
-            type = "info";//默认为info
-        }
-        //显示
-        var className = "alert-" + type;//alert类型
-        $info.addClass(className);
-        $info.html(text).slideDown("slow");
-        ////定时隐藏
-        setInfoTimeout();
-    }
+<h2 id="tblhead">
+    @(ViewBag.Title)账号(<a href="http://xunlei6.com/2.htm" target="_blank">原地址</a>)
+    (<a href="/Thunder/Update">强制更新</a>)
+</h2>
 
-    function setInfoTimeout() {
-        timeHide = setTimeout(function () {
-            $info.slideUp("slow", function () {
-                $info.removeClass(className);
-            });
-        }, 2000);
-    }
-
-    $(function () {
-        //将info固定在顶部
-        $info = $("#info");
-        $info.css("left", (window.innerWidth - $info.width()) / 2);
-
-        $info.hover(function () {
-            //如果已经设置Timeout则清除
-            if (timeHide)
-            {
-                clearTimeout(timeHide);
-            }
-        }, function () {
-            //移出去,加上timeout
-            setInfoTimeout();
-        });
-    });
-
-    function clipOperation() {
-        //复制到剪贴板链接的显示,隐藏
-        //先隐藏掉
-        $(".clip").hide();
-        $("td").hover(function () {
-            //移上去
-            $(".clip", $(this)).show();
-        }, function () {
-            //移出
-            $(".clip", $(this)).hide();
-        });
-
-        //复制功能
-        $(".clip").click(function () {
-            doCopy($(this).prev("span").text());
-        });
-
-        //双击复制
-        $("#tbldata td").dblclick(function () {
-            doCopy($("span:first", $(this)).text());
-        });
-    }
-
-    function doCopy(text) {
-        if ($.browser.msie)
-        {
-            clipboardData.setData("text", text);
-            showInfo("[" + text + "] 已复制到剪贴板");
-        }
-        else
-        {
-            showInfo(
-                "复制到剪贴板功能只支持<span style='font-size:18px;color:black;'>IE</span>浏览器 或 国产浏览器兼容核心<br /><a href='@Url.Action("Help")' target='_blank'>怎么设置兼容模式啊</a>", "danger");
-        }
-    }
-</script>
-
-<h2 id="table-head">@(ViewBag.Title)账号(<a href="http://xunlei6.com/2.htm" target="_blank">原地址</a>)(<a href="/Thunder/Update">强制更新</a>)</h2>
+<div id="tips">双击也可复制</div>
 <div class="alert" id="info">复制成功</div>
+
 <div id="tbldata">
-    <table class="table table-hover" id="main-table">
+    <table class="table table-bordered">
         <colgroup>
             <col width="10%" />
             <col width="45%" />
             <col width="45%" />
         </colgroup>
         <tr id="table-header">
-            <th>#</th>
+            <th class="line-index">#</th>
             <th>账号</th>
             <th>密码</th>
         </tr>
-
-        <script type="text/x-jsrender" id="tr-tmpl">
+        <script type="text/template" id="tmpl" data-razor-each="pair in ViewBag.pairs">
             <tr>
-                <td>{{:#index+1}}</td>
-                <td><span>{{:id}}</span><span class="clip">复制到剪贴板</span></td>
-                <td><span>{{:pwd}}</span><span class="clip">复制到剪贴板</span></td>
+                <td class="line-index">`($index +1)</td>
+                <td><span>`(pair.id)</span><span class="clip">复制到剪贴板</span></td>
+                <td><span>`(pair.pwd)</span><span class="clip">复制到剪贴板</span></td>
             </tr>
         </script>
     </table>
 </div>
-<script src="/Content/JsRender/jsrender.min.js"></script>
-<script>
 
+<script>
+    razor.symbol('`');
     $(function () {
         $.getJSON('@Url.Action("Json")', function (data) {
-            //jq tmpl
-            //$("#tr-tmpl").tmpl(data).appendTo(("#main-table"));
-
-            //js render
-            var html = $("#tr-tmpl").render(data);
-            $(html).appendTo("#main-table");
-            clipOperation();
+            $("#tmpl").renderToParent({
+                pairs: data
+            });
         });
     });
 </script>
-

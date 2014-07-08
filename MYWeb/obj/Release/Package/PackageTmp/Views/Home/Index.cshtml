@@ -1,6 +1,6 @@
 ﻿@using System.Data
 @{
-    ViewBag.Title = "首页";
+    ViewBag.Title = "Home";
     if(false)
     {
         <script src="~/Scripts/_references.js"></script>
@@ -31,6 +31,11 @@
         <button class="btn i-do-button" url="/Music/Index">
             音乐暂存
         </button>
+
+        <div class="well" style="margin-top:20px;" id="toys">
+            <a href="~/Ashx/SendMail.ashx" target="_blank">通过网址发送邮件</a>
+            <a href="/CssPreHandle" target="_blank">变量CSS,类似预处理器</a>
+        </div>
     </div>
 </div>
 
@@ -44,18 +49,16 @@
         bottom: 20px;
         left: 0;
     }
+
+    #toys a
+    {
+        margin: 5px;
+    }
 </style>
 <script>
     $(function () {
         $(".i-do-button").click(function () {
             window.open($(this).attr("url"), "_blank");
         });
-
-        //var $text = $("#arrowimg-textdes");
-        //$("#arrowimg").mouseover(function () {
-        //    $text.show();
-        //}).mouseout(function () {
-        //    $text.hide();
-        //});
     });
 </script>

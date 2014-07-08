@@ -40,7 +40,7 @@ function doCopy(text) {
     else
     {
         showInfo(
-            "复制到剪贴板功能只支持<span style='font-size:18px;color:black;'>IE</span>浏览器 或 国产浏览器兼容核心<br /><a href='/Thunder/Help' target='_blank'>怎么设置兼容模式啊</a>", "danger");
+            "复制到剪贴板功能只支持 IE 浏览器 或 国产浏览器兼容核心<br /><a href='/Thunder/Help' target='_blank'>怎么设置兼容模式啊</a>", "danger");
     }
 }
 
@@ -48,30 +48,38 @@ $(function () {
     //值初始化
     $info = $("#info");
 
-    //复制到剪贴板链接的显示,隐藏
-    //先隐藏掉
-    $(".clip").hide();
-    $("td").hover(function () {
-        //移上去
-        $(".clip", $(this)).show();
-
-    }, function () {
-        //移出
-        $(".clip", $(this)).hide();
+    //复制按钮
+    $("td").live({
+        mouseover: function () {
+            //移上去
+            $(".clip", $(this)).show();
+        },
+        mouseout: function () {
+            //移出
+            $(".clip", $(this)).hide();
+        }
     });
 
     //复制功能
-    $(".clip").click(function () {
+    $(".clip").live("click", function () {
         doCopy($(this).prev("span").text());
     });
 
     //双击复制
-    $("#tbldata td").dblclick(function () {
+    $("#tbldata td").live('dblclick', function () {
         doCopy($("span:first", $(this)).text());
     });
 
     //将info固定在顶部
     $info.css("left", (window.innerWidth - $info.width()) / 2);
+
+    //点击行变色,除去header
+    $("tr:not(#table-header)", $("#tbldata")).live('click', function () {
+        //其他行 正常色
+        $(this).siblings().children().removeClass("clickcyan");
+        //当前行变cyan
+        $(this).children().addClass("clickcyan");
+    });
 
     //如果鼠标放在$info上,则暂时取消定时隐藏
     $info.hover(function () {
@@ -84,13 +92,5 @@ $(function () {
     function () {
         //移出去,加上timeout
         setInfoTimeout();
-    });
-
-    //点击行变色,除去header
-    $("tr", $("#tbldata")).not("table-header").click(function () {
-        //其他行 正常色
-        $(this).siblings().children().removeClass("clickcyan");
-        //当前行变cyan
-        $(this).children().addClass("clickcyan");
     });
 });

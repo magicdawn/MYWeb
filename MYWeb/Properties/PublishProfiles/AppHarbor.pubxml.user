@@ -145,10 +145,10 @@
       <publishTime>03/29/2014 13:17:18</publishTime>
     </File>
     <File Include="bin/MYWeb.dll">
-      <publishTime>06/04/2014 22:06:10</publishTime>
+      <publishTime>07/08/2014 13:52:07</publishTime>
     </File>
     <File Include="bin/MYWeb.pdb">
-      <publishTime>06/04/2014 22:06:10</publishTime>
+      <publishTime>06/06/2014 17:48:27</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>05/18/2014 20:15:26</publishTime>
@@ -2067,8 +2067,11 @@
     <File Include="Content/Bootstrap/v2/img/glyphicons-halflings.png">
       <publishTime>03/29/2014 19:09:23</publishTime>
     </File>
+    <File Include="Content/Clipboard/jquery.zclip.js">
+      <publishTime>07/08/2014 13:26:07</publishTime>
+    </File>
     <File Include="Content/Clipboard/jquery.zclip.min.js">
-      <publishTime>12/29/2013 14:02:00</publishTime>
+      <publishTime>07/08/2014 13:23:35</publishTime>
     </File>
     <File Include="Content/Clipboard/ZeroClipboard.swf">
       <publishTime>12/29/2013 14:02:01</publishTime>
@@ -2703,6 +2706,9 @@
     <File Include="Views/Blog/Add.cshtml">
       <publishTime>01/10/2014 20:22:52</publishTime>
     </File>
+    <File Include="Views/CssPreHandle/Index.cshtml">
+      <publishTime>07/08/2014 14:15:21</publishTime>
+    </File>
     <File Include="Views/Home/About.cshtml">
       <publishTime>03/29/2014 13:16:43</publishTime>
     </File>
@@ -2710,10 +2716,10 @@
       <publishTime>03/29/2014 13:16:43</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>06/04/2014 18:19:27</publishTime>
+      <publishTime>07/08/2014 14:25:40</publishTime>
     </File>
     <File Include="Views/Home/Navigation.cshtml">
-      <publishTime>03/29/2014 20:57:18</publishTime>
+      <publishTime>07/08/2014 10:49:57</publishTime>
     </File>
     <File Include="Views/Music/Index.cshtml">
       <publishTime>06/01/2014 23:58:59</publishTime>
@@ -2746,13 +2752,13 @@
       <publishTime>03/29/2014 13:16:43</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>06/04/2014 22:06:16</publishTime>
+      <publishTime>06/06/2014 17:54:37</publishTime>
     </File>
     <File Include="Web.Debug.config">
       <publishTime>03/29/2014 13:16:43</publishTime>
     </File>
     <File Include="Web.Release.config">
-      <publishTime>06/04/2014 18:02:38</publishTime>
+      <publishTime>06/04/2014 18:07:40</publishTime>
     </File>
   </ItemGroup>
 </Project>

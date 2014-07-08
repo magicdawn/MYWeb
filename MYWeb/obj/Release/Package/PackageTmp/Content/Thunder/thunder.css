@@ -38,14 +38,14 @@ td
 /*复制到剪贴板,链接*/
 .clip
 {
-    display: inline-block;
+    display: none;
     /*margin-right: 5px;
     margin-top: 5px;*/
     float: right;
     font-size: 14px;
     text-decoration: underline;
     text-decoration-color: blue;
-    color: purple;
+    color: snow;
     cursor: pointer;
 }
 
@@ -56,6 +56,7 @@ td
     /*background-color:*/
 }
 
+/*单元格hover*/
 #tbldata td:hover
 {
     background-color: #ff6a00 !important;
@@ -66,4 +67,10 @@ td
 .clickcyan
 {
     background-color: cyan;
+}
+
+/*行号*/
+.line-index
+{
+    text-align: center !important;
 }

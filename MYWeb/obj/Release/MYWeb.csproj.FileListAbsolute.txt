@@ -2,6 +2,7 @@ D:\C#\project\MYWeb\MYWeb\bin\MYWeb.dll.config
 D:\C#\project\MYWeb\MYWeb\bin\MYWeb.dll
 D:\C#\project\MYWeb\MYWeb\bin\MYWeb.pdb
 D:\C#\project\MYWeb\MYWeb\bin\Antlr3.Runtime.dll
+D:\C#\project\MYWeb\MYWeb\bin\CKFinder.dll
 D:\C#\project\MYWeb\MYWeb\bin\DotNetOpenAuth.AspNet.dll
 D:\C#\project\MYWeb\MYWeb\bin\DotNetOpenAuth.Core.dll
 D:\C#\project\MYWeb\MYWeb\bin\DotNetOpenAuth.OAuth.Consumer.dll
@@ -9,12 +10,14 @@ D:\C#\project\MYWeb\MYWeb\bin\DotNetOpenAuth.OAuth.dll
 D:\C#\project\MYWeb\MYWeb\bin\DotNetOpenAuth.OpenId.dll
 D:\C#\project\MYWeb\MYWeb\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
 D:\C#\project\MYWeb\MYWeb\bin\EntityFramework.dll
+D:\C#\project\MYWeb\MYWeb\bin\Magicdawn.dll
 D:\C#\project\MYWeb\MYWeb\bin\Microsoft.Data.Edm.dll
 D:\C#\project\MYWeb\MYWeb\bin\Microsoft.Data.OData.dll
 D:\C#\project\MYWeb\MYWeb\bin\Microsoft.Web.Infrastructure.dll
 D:\C#\project\MYWeb\MYWeb\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
 D:\C#\project\MYWeb\MYWeb\bin\Microsoft.Web.WebPages.OAuth.dll
 D:\C#\project\MYWeb\MYWeb\bin\Newtonsoft.Json.dll
+D:\C#\project\MYWeb\MYWeb\bin\Qiniu.dll
 D:\C#\project\MYWeb\MYWeb\bin\System.Net.Http.dll
 D:\C#\project\MYWeb\MYWeb\bin\System.Net.Http.Formatting.dll
 D:\C#\project\MYWeb\MYWeb\bin\System.Net.Http.WebRequest.dll
@@ -32,8 +35,10 @@ D:\C#\project\MYWeb\MYWeb\bin\System.Web.WebPages.Razor.dll
 D:\C#\project\MYWeb\MYWeb\bin\WebGrease.dll
 D:\C#\project\MYWeb\MYWeb\bin\WebMatrix.Data.dll
 D:\C#\project\MYWeb\MYWeb\bin\WebMatrix.WebData.dll
+D:\C#\project\MYWeb\MYWeb\bin\CKFinder.pdb
+D:\C#\project\MYWeb\MYWeb\bin\Magicdawn.pdb
+D:\C#\project\MYWeb\MYWeb\bin\Magicdawn.xml
 D:\C#\project\MYWeb\MYWeb\bin\EntityFramework.xml
-D:\C#\project\MYWeb\MYWeb\bin\Newtonsoft.Json.xml
 D:\C#\project\MYWeb\MYWeb\bin\System.Net.Http.xml
 D:\C#\project\MYWeb\MYWeb\bin\System.Net.Http.Formatting.xml
 D:\C#\project\MYWeb\MYWeb\bin\System.Net.Http.WebRequest.xml
@@ -102,9 +107,6 @@ D:\C#\project\MYWeb\MYWeb\bin\ko\System.Spatial.resources.dll
 D:\C#\project\MYWeb\MYWeb\bin\ru\System.Spatial.resources.dll
 D:\C#\project\MYWeb\MYWeb\bin\zh-Hans\System.Spatial.resources.dll
 D:\C#\project\MYWeb\MYWeb\bin\zh-Hant\System.Spatial.resources.dll
+D:\C#\project\MYWeb\MYWeb\obj\Release\MYWeb.csprojResolveAssemblyReference.cache
 D:\C#\project\MYWeb\MYWeb\obj\Release\MYWeb.dll
 D:\C#\project\MYWeb\MYWeb\obj\Release\MYWeb.pdb
-D:\C#\project\MYWeb\MYWeb\bin\Magicdawn.dll
-D:\C#\project\MYWeb\MYWeb\bin\Magicdawn.pdb
-D:\C#\project\MYWeb\MYWeb\bin\Magicdawn.xml
-D:\C#\project\MYWeb\MYWeb\obj\Release\MYWeb.csprojResolveAssemblyReference.cache

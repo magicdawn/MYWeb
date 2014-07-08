@@ -1,0 +1,139 @@
+﻿@{
+    ViewBag.Title = "简单CSS预处理";
+}
+
+<script src="~/Content/razor-tmpl/razor-tmpl.js"></script>
+<script src="~/Content/Clipboard/jquery.zclip.js"></script>
+<style>
+    .debug
+    {
+        /*border: 1px solid red;*/
+    }
+
+    .clearfix
+    {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        clear: both;
+    }
+
+    #addVar
+    {
+        /*display: inline-block;
+        margin-left: 10px;*/
+    }
+
+    #varName
+    {
+        width: 80px;
+    }
+
+    #varValue
+    {
+        width: 100px;
+    }
+
+    #var-left
+    {
+        float: left;
+    }
+
+    #var-right
+    {
+        float: left;
+    }
+
+    #varDefCode
+    {
+        width: 250px;
+        height: 220px;
+    }
+
+    #template, #result
+    {
+        width: 300px;
+        height: 200px;
+    }
+</style>
+
+<h2>@ViewBag.Title</h2>
+<div id="top" class="debug">
+    <div id="var-left" class="debug">
+        <div id="addVar">
+            <input type="text" id="varName" />
+            <span>=</span>
+            <input type="text" id="varValue" />
+            <input type="button" value="添加变量" id="btnAddVar" />
+        </div>
+        <textarea id="varDefCode" draggable="false"></textarea>
+    </div>
+    @*<div id="var-right" class="debug">
+            <table>
+                <tr>
+                    <th>name</th>
+                    <th>value</th>
+                    <th>type</th>
+                </tr>
+            </table>
+        </div>*@
+
+    <div class="clearfix"></div>
+</div>
+
+
+<div id="bottom" class="debug">
+    <textarea id="template"></textarea>
+    <input type="button" value="===>>>转换" id="transform" />
+    <textarea id="result"></textarea>
+    <input type="button" value="复制到剪贴板" id="copyToClipboard" />
+</div>
+
+<script>
+    $(function () {
+        var $def = $("#varDefCode");
+        var $tmpl = $("#template");
+        var $result = $("#result");
+        var $varName = $("#varName");
+        var $varValue = $("#varValue");
+        var $btnAddVar = $("#btnAddVar");
+
+        //转换按钮
+        $("#transform").click(function () {
+            @*  @{ def } template     *@
+            var template = "@@{" + $def.val() + "}" + $tmpl.val();
+            var res = razor.render(template);
+            $result.val(res);
+        });
+
+        //复制按钮
+        $("#copyToClipboard").zclip({
+            path: '/Content/Clipboard/ZeroClipboard.swf',
+            copy: function () {
+                return $result.val();
+            }
+        });
+
+        //添加变量按钮
+        $btnAddVar.click(function () {
+            //append到codeDef
+            var res = $def.val().trim();
+            if (res)
+            {
+                //不为空,换行
+                res += '\n';
+            }
+            $def.val(res + "var {0} = {1};".razorFormat($varName.val(), $varValue.val()).trim());
+            //情空
+            $varName.val('').focus();
+            $varValue.val('');
+        });
+
+        $varValue.keypress(function (e) {
+            if (e.which == 13)
+            {
+                $btnAddVar.click();
+            }
+        });
+    });
+</script>

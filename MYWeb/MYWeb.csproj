@@ -203,6 +203,7 @@
     <Compile Include="Code\ThunderHelper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\Play\CssPreHandleController.cs" />
     <Compile Include="Controllers\Play\MusicController.cs" />
     <Compile Include="Controllers\Play\SimsimiController.cs" />
     <Compile Include="Controllers\TestController.cs" />
@@ -235,6 +236,7 @@
     <Content Include="Content\Bootstrap\v2\bootstrap.min.js" />
     <Content Include="Content\Bootstrap\v2\img\glyphicons-halflings-white.png" />
     <Content Include="Content\Bootstrap\v2\img\glyphicons-halflings.png" />
+    <Content Include="Content\Clipboard\jquery.zclip.js" />
     <Content Include="Content\Clipboard\jquery.zclip.min.js" />
     <Content Include="Content\Clipboard\ZeroClipboard.swf" />
     <Content Include="Content\jQuery-UI-Bootstarp\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -455,6 +457,7 @@
     <Content Include="Views\Thunder\Help.cshtml" />
     <Content Include="Views\Thunder\Index.cshtml" />
     <Content Include="Views\Home\Navigation.cshtml" />
+    <Content Include="Views\CssPreHandle\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

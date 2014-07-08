@@ -2,105 +2,25 @@
     ViewBag.Title = "音乐管理";
 }
 
-<div class="container">
+@* 七牛云存储 *@
+<script src="~/Content/Qiniu/plupload/js/plupload.full.min.js"></script>
+<script src="~/Content/Qiniu/qiniu.js"></script>
+@* 首页js *@
+<script src="~/Content/Music/index.js"></script>
+
+<div class="container" id="upload-container">
     <div style="margin:50px;"></div>
-    <form action="@Url.Action("Upload")" method="post" enctype="multipart/form-data">
-        <h1>上传mp3文件</h1>
-        <input type="file" name="mp3" title="上传" accept="*mp3" width="500px" id="mp3" />
-        <input type="submit" value="上传" id="btnUpload" class="btn" />
+    <h1 style="display:inline;">上传mp3文件</h1>
 
-        <script src="~/Content/AjaxUpload/ajaxfileupload.js"></script>
-        <script>
-            $(function () {
-                var $loading = $("#loading");
+    <a href="https://portal.qiniu.com/bucket/resource?bucket=ranger#1" target="_blank">Qiniu</a>
+    <br /><br /><br />
 
-                $("#btnUpload").click(function (e) {
-                    //不调到action
-                    e.preventDefault();
+    <input type="button" value="选择文件" id="select_file" class="btn" />
+    <br />
+    <input style="margin-top:10px;" type="button" value="上传" id="start_upload" class="btn btn-success" />
 
-                    //验证文件
-                    if ($("#mp3").val() == "")
-                    {
-                        alert("还没有选取文件呢~");
-                        return;
-                    }
-                    var path = $("#mp3").val();
-                    var ext = path.substring(path.lastIndexOf("."));
-                    if (!(ext == ".mp3" || ext == ".MP3" || ext == ".wma" || ext == ".WMA"))
-                    {
-                        alert("只支持MP3 和 WMA 格式");
-                        return;
-                    }
+    <div id="filelist"></div>
+    <div id="result" style="margin-top:20px;background-color:black;color:green;">
 
-                    //loading动画,上传按钮
-                    $loading.show();
-                    this.disabled = true;
-
-                    $.ajaxFileUpload({
-                        url: $("form").prop("action"),
-                        secureuri: false,
-                        fileElementId: 'mp3',
-                        dataType: 'json',
-                        success: function (res) {
-                            //隐藏动画,恢复按钮
-                            $loading.hide();
-                            $("#btnUpload").prop("disabled",false);
-
-                            if (res.UploadSuccess)
-                            {
-                                //上传成功
-                                $("#message").html(
-                                    "<h4 class='text-success'>" + res.Message + "</h4>" +
-                                    "<br />" +
-                                    //复制按钮
-                                    "<button class='btn btn-info' id='copyPath'>复制路径</button>" +
-
-                                    "<p class='text-info' id='div-path'>" + res.Path + "</p>"
-                                );
-                            }
-                            else
-                            {
-                                //上传失败
-                                $("#message").html(
-                                    "<p class='text-error'>" + res.Message + "</p>"
-                                );
-                            }
-                            alert(res.Message);
-                        }
-                    })
-                    //$.post(url, { "file": file }, function (res) {
-                    //    if (res.UploadSuccess)
-                    //    {
-                    //        //上传成功
-                    //        $("#message").text(res.Message + "<br />" + res.Path);
-                    //    }
-                    //    else
-                    //    {
-                    //        $("#message").text(res.Message);
-                    //    }
-                    //    alert(res.Message);
-                    //}, 'json');
-                });
-
-                $("#copyPath").live("click", function () {
-                    if (typeof (clipBoardData) != "undefined")
-                    {
-                        clipboardData.setData("text", $("#div-path").text());
-                        alert("已成功复制到剪贴板");
-                    }
-                    else
-                    {
-                        alert("复制功能不支持你的浏览器,请手动复制");
-                    }
-                });
-            });
-        </script>
-    </form>
-    <div id="message">
-        <div id="loading" style="display:none">
-            <h2 class="text-warning">正在缓慢上传,请骚后...</h2>
-            <img src="~/Image/Music/loading-step.gif" />
-        </div>
     </div>
-    <table class="table table-bordered"></table>
 </div>
